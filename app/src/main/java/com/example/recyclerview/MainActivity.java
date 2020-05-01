@@ -7,7 +7,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.Menu;
 import android.widget.Toast;
+
+import com.google.android.material.appbar.MaterialToolbar;
 
 import java.util.ArrayList;
 
@@ -16,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<ItemsList> itemsListArrayList;
     private ItemAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
+    private MaterialToolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +32,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
         recyclerView = findViewById(R.id.recycler);
+        toolbar = findViewById(R.id.tool_Bar);
         layoutManager = new LinearLayoutManager(this);
+        setSupportActionBar(toolbar);
         adapter = new ItemAdapter(itemsListArrayList);
 
         recyclerView.setAdapter(adapter);
@@ -58,6 +64,12 @@ public class MainActivity extends AppCompatActivity {
                         }).show();
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
+        return true;
     }
 
     public void addItem(int position) {
